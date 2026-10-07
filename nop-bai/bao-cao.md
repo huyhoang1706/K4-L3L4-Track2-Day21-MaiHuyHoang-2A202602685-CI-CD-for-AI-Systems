@@ -27,13 +27,13 @@ HƯỚNG DẪN - đọc rồi XÓA TOÀN BỘ các khối chú thích này sau k
 
 | Lần chạy | n_estimators | learning_rate | max_depth | f1_score | accuracy |
 |---|---|---|---|---|---|
-| 1 | ___ | ___ | ___ | ___ | ___ |
-| 2 | ___ | ___ | ___ | ___ | ___ |
-| 3 | ___ | ___ | ___ | ___ | ___ |
+| 1 | 100 | 0.1 | 3 | 0.7109 | 0.8780 |
+| 2 | 50 | 0.05 | 2 | 0.6051 | 0.8460 |
+| 3 | 200 | 0.1 | 5 | 0.7149 | 0.8740 |
 
-**Bộ siêu tham số đã chọn:** `n_estimators=___`, `learning_rate=___`, `max_depth=___`.
+**Bộ siêu tham số đã chọn:** `n_estimators=200`, `learning_rate=0.1`, `max_depth=5`.
 
-**Lý do:** ___
+**Lý do:** Ba lần chạy được thực hiện trên cùng tập train_batch1 và holdout để so sánh công bằng. Cấu hình 200 cây, learning_rate 0.1 và max_depth 5 đạt F1 cao nhất, 0.7149, nên được chọn cho Bước 2 vì vượt ngưỡng 0.65. Cấu hình mặc định 100 cây, depth 3 có accuracy cao nhất là 0.8780 nhưng F1 chỉ 0.7109. Như vậy accuracy cao nhất không trùng với F1 cao nhất; với dữ liệu mất cân bằng, accuracy có thể bị ảnh hưởng nhiều bởi lớp thu nhập thấp. Cấu hình 50 cây với learning_rate 0.05 đạt F1 thấp nhất, 0.6051, cho thấy tốc độ học nhỏ cần nhiều cây hơn để học đủ. Tăng số cây lên 200 khi giữ learning_rate 0.1 cải thiện F1 0.0040 so với cấu hình mặc định, dù accuracy giảm nhẹ 0.0040.
 
 <!--
 Trả lời trong phần Lý do:
