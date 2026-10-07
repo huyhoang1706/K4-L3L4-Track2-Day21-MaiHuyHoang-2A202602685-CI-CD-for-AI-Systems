@@ -49,7 +49,7 @@ Trả lời trong phần Lý do:
 
 <!-- Khoảng 120 - 150 từ. -->
 
-___
+Tập Adult mất cân bằng lớp: chỉ khoảng 24,8% mẫu có thu nhập trên 50K. Vì vậy, một mô hình luôn dự đoán "thu nhập thấp" vẫn có accuracy khoảng 0,752, nhưng không phát hiện được bất kỳ mẫu dương nào nên F1 bằng 0. Accuracy chỉ cho biết tỷ lệ dự đoán đúng chung và dễ bị lớp đa số làm cho có vẻ tốt. Trong khi đó, F1 của lớp dương kết hợp precision và recall, nên phản ánh tốt hơn khả năng tìm đúng nhóm thu nhập cao mà bài toán quan tâm. Do đó quality gate dùng `f1_score >= 0.65`. Khi tính F1, em dùng mặc định cho nhãn dương `1`, không dùng `average="weighted"` hoặc `average="macro"`; hai cách trung bình này làm kết quả bị ảnh hưởng bởi lớp thu nhập thấp và không còn phản ánh trực tiếp chất lượng dự đoán lớp thu nhập cao.
 
 <!--
 Cần nêu được:
@@ -68,9 +68,8 @@ Cần nêu được:
 
 | Khó khăn | Nguyên nhân | Cách giải quyết |
 |---|---|---|
-| ___ | ___ | ___ |
-| ___ | ___ | ___ |
-| ___ | ___ | ___ |
+| GitHub Runner không SSH được vào EC2 để chạy job Release. | Security group ban đầu chỉ cho phép IP cá nhân; đồng thời public deploy key chưa có trong `authorized_keys` của user `ubuntu`. | Thêm deploy key vào EC2, kiểm tra SSH bằng private key tương ứng, mở tạm port 22 cho runner trong lúc pipeline chạy rồi gỡ rule sau khi deploy xong. |
+| MLflow 2.13 lỗi khi dùng SQLAlchemy phiên bản mới. | API pool của SQLAlchemy mới không còn tương thích với code của MLflow đang ghim trong lab. | Ghim `sqlalchemy==2.0.31` trong `requirements.txt`, tạo lại môi trường và chạy lại ba test trước khi huấn luyện. |
 
 ---
 
